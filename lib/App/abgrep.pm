@@ -40,7 +40,11 @@ _
         my $files = $args{files};
         my ($fh, $file);
 
-        unless (@$files) {
+        my $show_label = 0;
+        if (@$files > 1) {
+            $show_label = 1;
+        } elsif (@$files == 1) {
+        } else {
             $fh = \*STDIN;
         }
 
@@ -60,7 +64,7 @@ _
 
                 my $line = <$fh>;
                 if (defined $line) {
-                    return ($line, $file);
+                    return ($line, $show_label ? $file : undef);
                 } else {
                     undef $fh;
                     redo READ_LINE;
