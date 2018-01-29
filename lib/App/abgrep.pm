@@ -37,13 +37,17 @@ _
     },
     output_code => sub {
         my %args = @_;
-        my $files = $args{files};
         my ($fh, $file);
 
+        my @files = @{ $args{files} // [] };
+        if ($args{regexps} && @{ $args{regexps} }) {
+            unshift @files, delete $args{pattern};
+        }
+
         my $show_label = 0;
-        if (!$files || !@$files) {
+        if (!@files) {
             $fh = \*STDIN;
-        } elsif (@$files > 1) {
+        } elsif (@files > 1) {
             $show_label = 1;
         }
 
@@ -51,8 +55,8 @@ _
           READ_LINE:
             {
                 if (!defined $fh) {
-                    return unless @$files;
-                    $file = shift @$files;
+                    return unless @files;
+                    $file = shift @files;
                     log_trace "Opening $file ...";
                     open $fh, "<", $file or do {
                         warn "abgrep: Can't open '$file': $!, skipped\n";
