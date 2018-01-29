@@ -41,11 +41,10 @@ _
         my ($fh, $file);
 
         my $show_label = 0;
-        if (@$files > 1) {
-            $show_label = 1;
-        } elsif (@$files == 1) {
-        } else {
+        if (!$files || !@$files) {
             $fh = \*STDIN;
+        } elsif (@$files > 1) {
+            $show_label = 1;
         }
 
         $args{_source} = sub {
