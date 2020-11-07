@@ -38,6 +38,18 @@ _
         },
         # XXX recursive (-r)
     },
+    modify_meta => sub {
+        my $meta = shift;
+        $meta->{examples} = [
+            {
+                summary => 'Show lines that contain foo, bar, AND baz (in no particular order), but do not contain qux NOR quux',
+                'src' => q([[prog]] --all -e foo -e bar -e baz -e -qux -e -quux),
+                'src_plang' => 'bash',
+                'test' => 0,
+                'x.doc.show_result' => 0,
+            },
+        ];
+    },
     output_code => sub {
         my %args = @_;
         my ($fh, $file);
