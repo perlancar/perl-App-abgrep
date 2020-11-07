@@ -24,7 +24,8 @@ gen_modified_sub(
     description => <<'_',
 
 This is a grep-like utility that is based on <pm:AppBase::Grep>, mainly for
-demoing and testing the module.
+demoing and testing the module. The unique features include multiple patterns
+and `--dash-prefix-inverts`.
 
 _
     add_args    => {
