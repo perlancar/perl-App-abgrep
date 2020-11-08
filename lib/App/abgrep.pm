@@ -43,11 +43,14 @@ _
         $meta->{examples} = [
             {
                 summary => 'Show lines that contain foo, bar, AND baz (in no particular order), but do not contain qux NOR quux',
-                'src' => q([[prog]] --all -e foo -e bar -e baz -e -qux -e -quux),
+                'src' => q([[prog]] --all --dash-prefix-inverts -e foo -e bar -e baz -e -qux -e -quux),
                 'src_plang' => 'bash',
                 'test' => 0,
                 'x.doc.show_result' => 0,
             },
+        ];
+        $meta->{links} = [
+            {url=>'prog:grep-terms'},
         ];
     },
     output_code => sub {
