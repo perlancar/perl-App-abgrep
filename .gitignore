@@ -2,3 +2,4 @@ App-abgrep-*
 .build
 *~
 nytprof*
+.DS_Store
